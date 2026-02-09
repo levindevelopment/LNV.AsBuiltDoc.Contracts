@@ -69,6 +69,21 @@ Deterministic ordering and redaction are mandatory.
 
 ---
 
+## Plan semantic validation ruleset
+
+This technology includes a machine-readable semantic validation ruleset:
+
+- `plan_validation.yaml`
+
+This ruleset defines:
+- defaults (port 9440, TLS verification)
+- required fields for `kind: Nutanix.PrismElement`
+- semantic checks (types/ranges, hostname/IP validation)
+- unknown-field policy (warn/error)
+- optional preflight steps (TCP probe, HTTPS probe, API probe) for GUI/Core implementations
+
+---
+
 ## 6. P0 Datasets (Mandatory)
 
 These datasets MUST be emitted when permissions allow.
