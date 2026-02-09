@@ -1,0 +1,59 @@
+name: Release contracts pack
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+jobs:
+  pack-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate required folders exist
+        shell: bash
+        run: |
+          test -d standards
+          test -d tech
+
+      - name: Ensure plan_validation.yaml exists for each tech
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=0
+          for d in tech/*; do
+            if [ -d "$d" ]; then
+              if [ ! -f "$d/plan_validation.yaml" ]; then
+                echo "Missing: $d/plan_validation.yaml"
+                missing=1
+              fi
+            fi
+          done
+          if [ "$missing" -ne 0 ]; then
+            echo "One or more tech folders are missing plan_validation.yaml"
+            exit 1
+          fi
+
+      - name: Build pack
+        shell: bash
+        run: |
+          TAG="${GITHUB_REF_NAME}"          # e.g. v1.0.1
+          VER="${TAG#v}"                    # e.g. 1.0.1
+          ZIP="asbuiltdoc-contracts-v${VER}.zip"
+          rm -f "$ZIP"
+          zip -r "$ZIP" standards tech
+          sha256sum "$ZIP" | tee "${ZIP}.sha256"
+
+      - name: Create GitHub Release + upload assets
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            asbuiltdoc-contracts-*.zip
+            asbuiltdoc-contracts-*.zip.sha256
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
