@@ -1,0 +1,77 @@
+schemaVersion: 1
+techId: Lenovo.DE
+displayName: "Lenovo DE (SANtricity Embedded REST)"
+description: >
+  Direct-v1 technology definition for Lenovo DE arrays using SANtricity Embedded REST (/devmgr).
+
+collector:
+  modulePath: "LNV.AsBuiltDoc.Lenovo.DE"
+  entryPoint: "Invoke-LnvAsBuiltDoc.Lenovo.DE"
+  runtime:
+    powershell: "7+"
+
+plan:
+  targetKind: "Lenovo.DE"
+  requiredEndpoints:
+    - name: "mgmt"
+      description: "Controller management IP/FQDN (NOT data/iSCSI)"
+  optionalParams:
+    port:
+      type: integer
+      default: 8443
+    apiBasePath:
+      type: string
+      default: "/devmgr"
+    timeoutSec:
+      type: integer
+      default: 60
+    skipTlsVerify:
+      type: boolean
+      default: false
+
+datasets:
+  # Dataset IDs are logical; bundle writer may map to files under datasets/.
+  - id: "systems"
+    description: "Storage systems inventory"
+    cardinality: "0..n"
+    objectKey:
+      fields: ["id"]
+    suggestedFilename: "systems.json"
+
+  - id: "drives"
+    description: "Physical drives inventory"
+    cardinality: "0..n"
+    objectKey:
+      fields: ["driveRef"]
+    suggestedFilename: "drives.json"
+
+  - id: "storage-containers"
+    description: "Normalized capacity containers (VolumeGroups + DiskPools/DDP)"
+    cardinality: "0..n"
+    objectKey:
+      fields: ["id"]
+    suggestedFilename: "storage-containers.json"
+
+  - id: "volumes"
+    description: "Volumes/LUNs inventory"
+    cardinality: "0..n"
+    objectKey:
+      fields: ["id"]
+    suggestedFilename: "volumes.json"
+
+objectIndex:
+  # Used to map stable keys to display names for assembler and reporting.
+  scopes:
+    - scopeId: "system"
+      keyFields: ["id"]
+      displayFields: ["name"]
+    - scopeId: "container"
+      keyFields: ["id"]
+      displayFields: ["name"]
+    - scopeId: "volume"
+      keyFields: ["id"]
+      displayFields: ["name"]
+
+notes:
+  - "Raw/evidence payloads may be emitted alongside normalized datasets during early development."
+  - "Events/alerts are not included in v1; can be added later as new dataset IDs."
