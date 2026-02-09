@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "solutionId": "example-nutanix-prism-element",
+  "description": "Example plan for Nutanix.PrismElement (minimal)",
+  "createdBy": "example",
+  "contracts": { "version": "v1.0.0" },
+  "targets": [
+    {
+      "techId": "Nutanix.PrismElement",
+      "kind": "Nutanix.PrismElement",
+      "key": "prism-01",
+      "displayName": "Prism Element",
+      "endpoints": { "prism": "10.0.0.20" },
+      "params": { "port": 9440, "verifyTls": true }
+    }
+  ],
+  "collectors": [
+    {
+      "techId": "Nutanix.PrismElement",
+      "modulePath": "LNV.AsBuiltDoc.Nutanix.PrismElement",
+      "entryPoint": "Invoke-LnvAsBuiltDoc.Nutanix.PrismElement",
+      "targetKeys": ["prism-01"],
+      "authRef": "prism-admin"
+    }
+  ],
+  "auth": {
+    "prism-admin": {
+      "kind": "pscredential",
+      "ref": "WindowsCredentialManager:Prism_Admin",
+      "notes": "Stored outside plan"
+    }
+  }
+}

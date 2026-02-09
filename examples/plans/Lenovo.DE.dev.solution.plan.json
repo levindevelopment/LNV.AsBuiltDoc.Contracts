@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "solutionId": "example-lenovo-de-dev",
+  "description": "Example plan for Lenovo.DE (dev/diagnostic)",
+  "createdBy": "example",
+  "contracts": { "version": "v1.0.0" },
+  "targets": [
+    {
+      "techId": "Lenovo.DE",
+      "kind": "Lenovo.DE",
+      "key": "de-01",
+      "displayName": "Lenovo DE Array",
+      "endpoints": { "mgmt": "10.0.0.10" },
+      "params": {
+        "port": 443,
+        "apiBasePath": "/devmgr",
+        "timeoutSec": 60,
+        "skipTlsVerify": true
+      },
+      "tags": { "env": "lab" }
+    }
+  ],
+  "collectors": [
+    {
+      "techId": "Lenovo.DE",
+      "modulePath": "LNV.AsBuiltDoc.Lenovo.DE",
+      "entryPoint": "Invoke-LnvAsBuiltDoc.Lenovo.DE",
+      "targetKeys": ["de-01"],
+      "authRef": "de-admin",
+      "options": { "profileSchema": true }
+    }
+  ],
+  "auth": {
+    "de-admin": {
+      "kind": "pscredential",
+      "ref": "WindowsCredentialManager:LenovoDE_Admin",
+      "notes": "Stored outside plan"
+    }
+  }
+}
