@@ -1,13 +1,14 @@
 schemaVersion: 1
 techId: Echo
 
-# Human intent (used by GUI/CLI later; not enforced by schema)
 description: >
-  Echo is the harness/reference tech used to validate the full Core execution pipeline,
-  including multi-collector orchestration, dataset/coverage writing, objectIndex writing,
+  Echo is the harness/reference tech used to validate the full Core execution pipeline:
+  multi-collector orchestration, dataset/coverage writing, objectIndex writing,
   schema validation, and per-collector failure isolation.
 
-# Strictness knobs (Core/GUI may interpret)
+appliesTo:
+  targetKind: echo
+
 unknownFieldPolicy:
   plan: warn
   target: warn
@@ -17,17 +18,21 @@ defaults:
   target:
     endpoints: {}
     params: {}
-    tags: []
+    tags: {}
   collector:
     params: {}
 
-rules:
-  # ---- Targets: shared typed objects
+validation:
+  required:
+    - schemaVersion
+    - solutionId
+    - targets
+    - collectors
+
   targets:
-    required: true
     minItems: 1
     each:
-      require:
+      required:
         - key
         - kind
         - displayName
@@ -42,14 +47,12 @@ rules:
         displayName: string
         endpoints: object
         params: object
-        tags: array
+        tags: object
 
-  # ---- Collectors: execution intent
   collectors:
-    required: true
     minItems: 1
     each:
-      require:
+      required:
         - techId
         - module
         - entryPoint
@@ -59,15 +62,13 @@ rules:
         entryPoint: string
         targetKeys: array
         params: object
+
       constraints:
-        # This tech folder validates collectors for Echo techId
         - path: techId
           equals: "Echo"
 
-      # Optional: validate targetKeys exist in plan.targets[].key (semantic)
       semantic:
         targetKeysMustExistInTargets: true
 
-      # Optional: allow fault injection for harness tests
       allowParams:
         - forceFail
