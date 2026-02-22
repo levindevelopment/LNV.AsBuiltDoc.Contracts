@@ -72,7 +72,7 @@
           "hotSpareSizeAsString": { "type": ["string", "null"] },
           "unconfiguredSpaceAsStrings": { "type": ["array", "null"] },
 
-          "driveTypes": { "type": ["array", "null"] },
+          "driveTypes": { "type": ["string", "array", "null"] },
           "unconfiguredSpaceByDriveType": { "type": ["object", "null"] },
 
           "resourceProvisionedVolumesEnabled": { "type": ["boolean", "null"] },
