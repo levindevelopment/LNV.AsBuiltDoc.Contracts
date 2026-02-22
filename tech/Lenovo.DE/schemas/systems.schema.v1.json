@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "tech/Lenovo.DE/schemas/systems.schema.v1.json",
+  "$id": "https://lnv-asbuiltdoc.github.io/LNV.AsBuiltDoc.Contracts/tech/Lenovo.DE/schemas/systems.schema.v1.json",
   "title": "Lenovo.DE Systems Dataset (v1)",
   "type": "object",
   "additionalProperties": false,

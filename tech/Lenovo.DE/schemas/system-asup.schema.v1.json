@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://levindevelopment.github.io/LNV.AsBuiltDoc.Contracts/tech/Lenovo.DE/schemas/system-asup.schema.v1.json",
+  "$id": "https://lnv-asbuiltdoc.github.io/LNV.AsBuiltDoc.Contracts/tech/Lenovo.DE/schemas/system-asup.schema.v1.json",
   "title": "Lenovo.DE system ASUP dataset schema (v1)",
   "type": "object",
   "additionalProperties": false,
