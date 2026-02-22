@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://levindevelopment.github.io/LNV.AsBuiltDoc.Contracts/tech/Lenovo.DE/schemas/system-asup.schema.v1.json",
+  "title": "Lenovo.DE system ASUP dataset schema (v1)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "items"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "patternProperties": { "^x-": {} },
+        "required": [
+          "systemId",
+          "asupCapable",
+          "onDemandCapable",
+          "asupEnabled",
+          "onDemandEnabled",
+          "remoteDiagsEnabled"
+        ],
+        "properties": {
+          "systemId": {
+            "type": "string",
+            "minLength": 1
+          },
+          "asupCapable": {
+            "type": "boolean"
+          },
+          "onDemandCapable": {
+            "type": "boolean"
+          },
+          "asupEnabled": {
+            "type": "boolean"
+          },
+          "onDemandEnabled": {
+            "type": "boolean"
+          },
+          "remoteDiagsEnabled": {
+            "type": "boolean"
+          }
+        }
+      }
+    }
+  }
+}
