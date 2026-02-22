@@ -14,6 +14,7 @@
         "additionalProperties": false,
         "patternProperties": { "^x-": {} },
         "required": [
+          "systemId",
           "controllerRef",
           "controllerLabel",
           "controllerSlot",
@@ -28,6 +29,7 @@
           "ipv4GatewayAddress"
         ],
         "properties": {
+          "systemId": { "type": "string", "minLength": 1 },
           "controllerRef": { "type": "string", "minLength": 1 },
           "controllerLabel": {
             "type": ["string", "null"],
