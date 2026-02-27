@@ -13,8 +13,9 @@
         "type": "object",
         "additionalProperties": false,
         "patternProperties": { "^x-": {} },
-        "required": ["driveRef", "status", "rawCapacityBytes", "usableCapacityBytes", "trayRef", "slot"],
+        "required": ["systemId", "driveRef", "status", "rawCapacityBytes", "usableCapacityBytes", "trayRef", "slot"],
         "properties": {
+          "systemId": { "type": "string", "minLength": 1 },
           "driveRef": { "type": "string", "minLength": 1 },
           "id": { "type": ["string", "null"] },
 
