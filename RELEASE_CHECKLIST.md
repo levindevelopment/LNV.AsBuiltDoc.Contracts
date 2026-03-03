@@ -24,6 +24,15 @@ The contracts zip MUST unzip to:
 
 No extra top-level folder is preferred. If one exists, ensure Core’s sync script can flatten it.
 
+### 1.4 Dataset schema folder naming (Direct-v1)
+For `CollectorContractManifest` contracts, schema folder naming is explicit via
+`spec.datasetSchemaPath` (for example, `dataset`).
+
+Guidance:
+- New Direct-v1 contracts SHOULD use `dataset/` and set `spec.datasetSchemaPath: dataset`.
+- Legacy `schemaVersion: 1` manifests may still use `schemas/` by convention.
+- If a contract uses a non-default folder name, document it in the manifest/spec so Core tools can resolve it deterministically.
+
 ## 2. Build the contracts pack
 
 Name:
@@ -32,6 +41,12 @@ Name:
 Contents:
 - `standards/*`
 - `tech/*`
+
+Reference command (run from repo root):
+- `git archive --format=zip --output asbuiltdoc-contracts-vX.Y.Z.zip HEAD standards tech`
+
+Validation command:
+- `unzip -l asbuiltdoc-contracts-vX.Y.Z.zip`
 
 ## 3. Smoke test the pack (required)
 
@@ -50,11 +65,16 @@ From a Core checkout:
 
 1) Create tag:
 - `git tag vX.Y.Z`
+
+2) Push the tag to trigger the release workflow:
 - `git push origin vX.Y.Z`
 
-2) Create GitHub Release:
-- Release name: `vX.Y.Z`
-- Attach: `asbuiltdoc-contracts-vX.Y.Z.zip`
+3) Workflow publishes release assets automatically:
+- Workflow: `.github/workflows/release-pack.yml`
+- Release name/tag: `vX.Y.Z`
+- Assets:
+  - `asbuiltdoc-contracts-vX.Y.Z.zip`
+  - `asbuiltdoc-contracts-vX.Y.Z.zip.sha256`
 
 DO NOT replace assets on an existing version. Publish a new version instead.
 
