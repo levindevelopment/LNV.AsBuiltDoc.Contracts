@@ -63,7 +63,7 @@ From a Core checkout:
 
 ## 4. Tag + Release (immutable)
 
-1) Create tag:
+1) Create and push tag:
 - `git tag vX.Y.Z`
 
 2) Push the tag to trigger the release workflow:
@@ -75,6 +75,9 @@ From a Core checkout:
 - Assets:
   - `asbuiltdoc-contracts-vX.Y.Z.zip`
   - `asbuiltdoc-contracts-vX.Y.Z.zip.sha256`
+
+CLI example (`gh`):
+- `gh release create vX.Y.Z asbuiltdoc-contracts-vX.Y.Z.zip --title "vX.Y.Z" --notes "Contracts pack release vX.Y.Z"`
 
 DO NOT replace assets on an existing version. Publish a new version instead.
 
