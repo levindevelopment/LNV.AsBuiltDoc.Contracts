@@ -65,12 +65,16 @@ From a Core checkout:
 
 1) Create and push tag:
 - `git tag vX.Y.Z`
+
+2) Push the tag to trigger the release workflow:
 - `git push origin vX.Y.Z`
 
-2) Create GitHub Release from that tag:
-- Release name: `vX.Y.Z`
-- Target tag: `vX.Y.Z`
-- Attach: `asbuiltdoc-contracts-vX.Y.Z.zip`
+3) Workflow publishes release assets automatically:
+- Workflow: `.github/workflows/release-pack.yml`
+- Release name/tag: `vX.Y.Z`
+- Assets:
+  - `asbuiltdoc-contracts-vX.Y.Z.zip`
+  - `asbuiltdoc-contracts-vX.Y.Z.zip.sha256`
 
 CLI example (`gh`):
 - `gh release create vX.Y.Z asbuiltdoc-contracts-vX.Y.Z.zip --title "vX.Y.Z" --notes "Contracts pack release vX.Y.Z"`
