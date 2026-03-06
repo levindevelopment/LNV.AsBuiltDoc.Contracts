@@ -4,6 +4,36 @@ displayName: Lenovo ThinkSystem DE Series
 collector: LNV.AsBuiltDoc.Lenovo.DE
 bundleSchema: 1
 
+spec:
+  datasets:
+    - key: systems
+      file: systems.json
+    - key: system-controllers
+      file: system-controllers.json
+    - key: management-interfaces
+      file: management-interfaces.json
+    - key: transport
+      file: transport.json
+    - key: system-dns
+      file: system-dns.json
+    - key: system-time
+      file: system-time.json
+    - key: trays
+      file: trays.json
+    - key: host-ports
+      file: host-ports.json
+    - key: drives
+      file: drives.json
+    - key: storage-containers
+      file: storage-containers.json
+    - key: volumes
+      file: volumes.json
+    - key: system-asup
+      file: system-asup.json
+  artifacts:
+    mappings:
+      datasetToSdt: mapping.dataset-to-sdt.v1.yaml
+
 domains:
   - name: System
     dataset: systems.json
