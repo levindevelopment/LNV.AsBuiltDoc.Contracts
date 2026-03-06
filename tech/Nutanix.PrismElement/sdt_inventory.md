@@ -211,7 +211,34 @@ Recommended tags:
 
 ---
 
-## 9. Next Refinements (Post-First Run)
+## 9. Example Rendering Notes (Mapping-Aware)
+
+Use `tech/Nutanix.PrismElement/mapping.dataset-to-sdt.v1.yaml` as the binding source between datasets and SDT tags.
+
+- Resolve `<ClusterKey>` from `cluster.uuid` when available (fallback: cluster name).
+- Render required Section 5 SDTs first in the main spine before optional appendix SDTs.
+- For table SDTs, skip empty rows but keep table headers to make “no data collected” explicit.
+- Keep `required: true` mappings deterministic and non-conditional; reserve conditional logic for optional appendix renderers.
+
+## 10. Required SDT Coverage Checklist
+
+The following required Section 5 tags must remain covered by dataset mapping entries.
+
+| Required SDT Tag | Source Dataset | Mapping Coverage |
+|---|---|---|
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Summary` | `cluster` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.ClusterConfig` | `cluster` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.FaultTolerance` | `cluster` | ✅ |
+| `LNV.Nutanix.PrismElement.Licensing[<ClusterKey>].Tables.Licenses` | `license` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.Hosts` | `hosts` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.Networks` | `networks` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.StorageContainers` | `storage_containers` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.StoragePools` | `storage_pools` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.VMs` | `vms` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.ProtectionDomains` | `protection_domains` | ✅ |
+| `LNV.Nutanix.PrismElement.Cluster[<ClusterKey>].Tables.RemoteSites` | `remote_sites` | ✅ |
+
+## 11. Next Refinements (Post-First Run)
 
 After first real bundle + assembly:
 - Confirm actual dataset keys for ProtectionDomain/RemoteSite (name vs uuid)
