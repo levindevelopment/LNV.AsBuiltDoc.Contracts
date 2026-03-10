@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "tech/Lenovo.DE/dataset/host-groups.schema.json",
+  "title": "Lenovo.DE host-groups dataset item",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["id", "systemId"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Canonical host-group identifier; primary key used by mapping joins."
+    },
+    "ref": {
+      "type": "string",
+      "description": "Source-native host-group reference. Keep for lineage; may match id."
+    },
+    "systemId": {
+      "type": "string",
+      "description": "Storage-system join key for per-system filtering and assembler partitioning."
+    },
+    "name": { "type": "string" },
+    "clusterRef": { "type": "string" },
+    "hostGroupRef": { "type": "string" }
+  }
+}
